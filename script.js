@@ -70,11 +70,14 @@
             .filter(task => {
 
                 // FILTER PENCARIAN
-                const keyword = searchKeyword.trim();
+                const keyword = searchKeyword.trim().toLowerCase();
+
+                const title = (task.title || "").toLowerCase();
+                const desc = (task.description || "").toLowerCase();
 
                 const matchSearch =
-                    task.title.toLowerCase().includes(keyword) ||
-                    task.description.toLowerCase().includes(keyword);
+                    title.includes(keyword) ||
+                    desc.includes(keyword);
 
                 // FILTER PRIORITAS
                 const matchFilter =
