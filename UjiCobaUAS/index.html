@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Routine - Smart Alarm</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+<body>
+
+    <div class="app-container">
+    <h1>Rutinitas</h1>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3 id="totalTasks">0</h3>
+            <p>Total</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="activeTasks">0</h3>
+            <p>Aktif</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="completedTasks">0</h3>
+            <p>Selesai</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="urgentTasks">0</h3>
+            <p>Mendesak</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="overdueTasks">0</h3>
+            <p>Terlewat</p>
+        </div>
+    </div>
+
+    <div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Cari tugas..."
+        onkeyup="renderTasks()"
+    >
+</div>
+<div class="filter-container">
+    <button class="filter-btn active" onclick="setFilter('all', this)">
+        Semua
+    </button>
+
+    <button class="filter-btn" onclick="setFilter('overdue', this)">
+        Terlewat
+    </button>
+
+    <button class="filter-btn" onclick="setFilter('high', this)">
+        Mendesak
+    </button>
+
+    <button class="filter-btn" onclick="setFilter('medium', this)">
+        Segera
+    </button>
+
+    <button class="filter-btn" onclick="setFilter('low', this)">
+        Santai
+    </button>
+</div>
+
+<div class="task-grid" id="taskContainer"></div>
+
+        <div class="fab" onclick="openAddModal()">+</div>
+    </div>
+
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <h3 id="formTitle" style="margin-bottom:25px; font-size: 24px;">Tambah Tugas Baru</h3>
+            <input type="text" id="taskName" placeholder="Nama Tugas (Cth: Meeting Web)">
+            <textarea id="taskDesc" placeholder="Deskripsi Tugas..."></textarea>
+            <input type="datetime-local" id="taskDeadline">
+            <button class="btn btn-save" onclick="saveTask()">Simpan Tugas</button>
+            <button class="btn btn-close" onclick="closeActiveModal('taskModal')">Batal</button>
+        </div>
+    </div>
+
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <h2 id="detailTitle" style="margin-bottom:10px; font-size: 26px;">Nama Tugas</h2>
+            <p id="detailDesc" style="color: var(--text-sub); font-size: 15px; margin-bottom: 25px; line-height: 1.6;">Deskripsi tugas</p>
+            
+            <div class="info-grid">
+                <div>Dibuat pd</div> <span id="detailCreated">-</span>
+                <div>Tanggal</div> <span id="detailDate">-</span>
+                <div>Waktu</div> <span id="detailTime">-</span>
+            </div>
+
+            <button class="btn btn-save" onclick="toggleTaskStatus()">
+                Tandai Selesai
+            </button>
+
+            <button class="btn btn-save" onclick="openEditModal()">
+                Edit Tugas
+            </button>
+
+            <button class="btn btn-delete" onclick="deleteTask()">
+                Hapus Tugas
+            </button>
+            <button class="btn btn-close" onclick="closeActiveModal('detailModal')">Tutup</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
